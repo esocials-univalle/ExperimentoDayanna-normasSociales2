@@ -1,0 +1,52 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block global_styles  %}
+    <style>
+
+        h2{
+            text-align: center;
+        }
+
+        p{
+            text-align: justify;
+        }
+
+        .firma{
+        max-width: 350px;
+        height: auto;
+        }
+
+        textarea{
+            width: 100%;
+        }
+
+        .debug-info{
+                display: none;
+            }
+    </style>  
+{% endblock %}
+
+
+{% block global_scripts  %}
+
+
+
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+    //Disable cut copy paste
+    $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+
+    //Disable mouse right click
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+});
+
+        </script>
+{% endblock %}
