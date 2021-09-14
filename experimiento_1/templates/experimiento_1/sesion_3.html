@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+ Tercera sesión
+
+{% endblock %}
+
+{% block content%}
+    <br>
+    <br>
+    
+        
+       <p> <h5> Ha llegado usted a la tercera sesión. Al finalizarla podrá recibir todo el dinero que tenga acumulado y tendrá la posibilidad 
+       de participar en una actividad donde podrá ganar hasta $7500 pesos más. </h4>  
+         
+    </p>
+
+        <p> <h4>Gracias por su participación. </h4> </p>  </h5> </p>
+        
+        
+    <br>
+    <br>
+
+  
+    {% next_button %}
+ <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                 <div class="modal-body">
+                    <p id="texto-modal"> </p>
+                </div>    
+      
+{% endblock %}
+

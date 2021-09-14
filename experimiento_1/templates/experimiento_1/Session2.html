@@ -1,0 +1,194 @@
+{% extends "base/Page.html" %}
+{% load otree %}
+
+{% block title %}
+Sesión 2
+{% endblock %}
+
+{% block body %}
+
+<div style="display: none">
+    {% formfields %}
+    {% next_button %}
+</div>
+
+<div id="surveyElement" style="display:inline-block;width:100%;"></div>
+
+{% endblock %}
+
+{% block local_scripts %}
+
+<script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js">
+</script>
+<script type="text/javascript">
+
+    let codigo = js_vars.codigo;
+
+    $(document).ready(function () {
+
+        Survey
+            .StylesManager
+            .applyTheme("default");
+
+
+        var json = {
+            "pages": [
+                {
+                    "name": "page1",
+                    "elements": [
+                        {
+                            type: "html",
+                            html: '<b>Nota:</b> En caso de estar desde un dispositivo móvil, se sugiere realizar la siguiente tarea con el dispositivo de forma horizontal. <br/><div class="sv_q_image"><img src="{% static "imagenes/telefono.jpg" %}"></div>'
+
+                        },
+                    ]
+                },
+                {
+                    "name": "page2",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "name": "banner",
+                            "imageLink": "{% static 'imagenes/2.1.jpg' %}",
+                            "imageWidth": "500px",
+                            "imageHeight": "300px"
+                        }, {
+                            "type": "panel",
+                            "innerIndent": 1,
+                            "name": "panel1",
+
+                            "elements": [
+                                {
+                                    title: "Es importante para nosotros digitalizar los párrafos que se presentan a continuación, por ello es necesario realizar un filtro a las siguientes transcripciones mediante un proceso de verificación.  Por favor, revise atentamente cuál de las siguientes transcripciones posee mayor nivel de coincidencia con el párrafo inicial. ",
+                                    isRequired: true,
+                                    "type": "radiogroup",
+                                    "choices": [
+                                        {
+                                            value: "Opcion 1",
+                                            score: 5,
+                                            text: "1.	Para erradicar la pobreza, las sociedades capitalistas generalmente se plantean agrandar el pastel económico. No obstante, si se abandonase la búsqueda del crecimiento y se adoptase un proceso de decrecimiento mediante una contracción económica planificada, la pobreza debería ser afontada de forma más directa. Entre otras cosas esto requeriría una reestructuración de los sistemas de propiedad e impositivos, con el objetivo de redistribuir la riqueza y asegura que todos tengan “suficiente “. La renta básica y la renta máxima son dos politicas que podrían contribuir a lograr estas importantes metas igualitarias sin tener que depender del crecimiento. "
+                                        },
+                                        {
+                                            value: "Opcion 2",
+                                            score: 50,
+                                            text: "2.	Para erradicar la pobreza, las sociedades capitalistas generalmente se plantean agrandar el pastel económico, en lugar de cortar los trozos de otra manera. No obstante, si se abandonase la búsqueda del crecimiento y se adoptase un proceso de decrecimiento mediante una contracción económica planificada, la pobreza debería ser afrontada de forma más directa. Entre otras cosas, esto requeriría una reestructuración de los sistemas de propiedad e impositivos, con el objetivo de redistribuir la riqueza y asegura que todos tengan “suficiente “(Alexander, 2011). La renta básica y la Renta Máxima son dos políticas que podrían contribuir a lograr estas importantes metas igualitarias, sin tener que depender del crecimiento."
+                                        },
+                                        {
+                                            value: "Opcion 3",
+                                            score: 30,
+                                            text: "3.	Para erradicar la pobreza, las sociedades capitalistas generalmente se plantean agrandar el pastel económico, en lugar de cortar los trozos de otra manera. No obstante, si se abandonase la bsqueda del crecimiento y se adoptase un proceso de decrecimiento mediante una contracción economica planificada la pobreza debería ser afrontada de forma mas directa. Entre otras cosas esto requeriría una reestructuración de los sistemas de propiedad e impositivos, con el objetivo de redistribuir la riqueza y asegura que todos tengan “suficiente“ (Alexander , 2011) . La renta básica y la Renta Máxima son dos políticas que podrían contribuir a lograr estas importantes metas igualitarias, sin tener que depender del crecimiento."
+                                        },
+                                        {
+                                            value: "Opcion 4",
+                                            score: 5,
+                                            text: "4.	Para erradicar la pobreza, las sociedades capitalistas generalmente se plantean agrandar el pastel eocnomico, en lugar de cortar los trozos de otra manera. No obstante, sis e abandonase la búsqueda del crecimimineto y se adpotase un proceso de decrecimiento mediante la contracción económica planificada, la pobreza debería ser afrontada de forma mas directa. Entre otras cosas, esto requeriría una reestructuración de los sistemas de propiedad e impositivos, con el objetivo de redistribuir la riqueza y asegura que todos tengan ‘suficiente’ (alexander, 2011). La renta básica y la renta máxima son dos políticas que podrían contribuir a lograr estas importantes metas igualitarias, sin tener que depender del crecimiento. "
+                                        },
+                                    ],
+
+                                },
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "name": "page3",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "name": "banner",
+                            "imageLink": "{% static 'imagenes/2.2.jpg' %}",
+                            "imageWidth": "500px",
+                            "imageHeight": "300px"
+                        }, {
+                            "type": "panel",
+                            "innerIndent": 1,
+                            "name": "panel1",
+
+                            "elements": [
+                                {
+                                    title: "Es importante para nosotros digitalizar los párrafos que se presentan a continuación, por ello es necesario realizar un filtro a las siguientes transcripciones mediante un proceso de verificación.  Por favor, revise atentamente cuál de las siguientes transcripciones posee mayor nivel de coincidencia con el párrafo inicial. ",
+                                    isRequired: true,
+                                    "type": "radiogroup",
+                                    "choices": [
+                                        {
+                                            value: "Opcion 1",
+                                            score: 50,
+                                            text: "1.	Aunque existe una considerable variedad de propuestas de renta básica, lo central es bastante sencilla. En su forma ideal y más radical, toda persona que viva permanentemente en una nación recibiría del estado una asignación periódica (por ejemplo, quincenalmente), y este dinero debería ser suficiente para que un individuo viva con un nivel mínimo, aunque digno, de seguridad económica. Sus defensores típicamente sostienen que el pago de una renta básica debería estar garantizado por el estado, no condicionada a la realización de cualquier tipo de trabajo y de carácter universal. "
+                                        },
+                                        {
+                                            value: "Opcion 2",
+                                            score: 30,
+                                            text: "2.	aunque existe una considerable variedad de propuestas de Renta Básica, lo central es bastante sencilla. En su forma ideal y más radical, toda persona que viva permanentemente en una nación recibiría del Estado una asignación periódica. por ejemplo, quincenalmente, y este dinero debería ser suficiente para que un individuo viva con un nivel mínimo, aunque digno, de seguridad económica. Sus defensores típicamente sostienen que el pago de una Renta Básica debería estar garantizado por el Estado, no condicionada a la realización de cualquier tipo de trabajo y de carácter universal. "
+                                        },
+                                        {
+                                            value: "Opcion 3",
+                                            score: 30,
+                                            text: "3.	Aunque existe una considerable variedad de propuestas de renta básica lo central es bastante sencilla. en su forma ideal y más radical toda persona que viva permanentemente en una nación recibiría del estado una asignación periódica por ejemplo quincenalmente y este dinero debería ser suficiente para que un individuo viva con un nivel mínimo aunque digno de seguridad económica. sus defensores típicamente sostienen que el pago de una renta básica debería estar garantizado por el estado no condicionada a la realización de cualquier tipo de trabajo y de carácter universal."
+                                        },
+                                        {
+                                            value: "Opcion 4",
+                                            score: 5,
+                                            text: "4.	Aunque existe una consderable variedad de propuestas de Rnta Básica, lo central es bastante sencilla. En su forma ideal y ms radical, toda persona que viva permanentemente en una nación recibira del Estado una asignación periódica. y este dinero debería ser sufciente para que un individuo viva con un nivel mínimo,  de seguridad económica Sus defensores típicamente sostienen que el pago de una Renta Básica debería estar garantzado por el Estado, no condicionada a la realización de cualquier tipo de trabajo y de carácter universal. "
+                                        },
+                                    ],
+
+                                },
+                            ]
+                        }
+                    ]
+                }
+
+
+
+
+
+
+            ]
+        }
+            ;
+        window.survey = new Survey.Model(json);
+
+        // survey
+        //     .onComplete
+        //     .add(function (result) {
+        //         document
+        //             .querySelector('#surveyResult')
+        //             .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+
+        //         // console.log(result.data);
+
+        //     });
+
+        // survey.data = {
+        //     satisfaction: 2
+        // };
+
+        // $("#surveyElement").Survey({ model: survey });
+
+        $("#surveyElement").Survey({
+            model: survey, onComplete: function (result) {
+                console.log(result.data)
+                let data = {}
+                var variable = 0
+                Object.keys(result.data).forEach(function (key) {
+                    if (typeof result.data[key] == "object") {
+                        Object.values(result.data[key]).map((v, i) => {
+                            data[key + "." + i] = v
+                        })
+                    } else {
+                        data[key] = result.data[key]
+                    }
+                    variable = key;
+                });
+                data[Number(variable) + Number(1)] = codigo;
+                $('#id_dataSession2').val(JSON.stringify(data))
+                $('.otree-btn-next').trigger('click')
+            },
+            // onValidateQuestion: surveyValidateQuestion
+        });
+
+    })
+
+</script>
+{% endblock local_scripts %}

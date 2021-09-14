@@ -1,0 +1,137 @@
+{% extends "base/Page.html" %}
+{% load otree %}
+
+{% block styles %}
+<style>
+    .tabla-resultados {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content-table {
+        text-align: center;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 500px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .content-table thead tr {
+        background-color: #4573c2;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 12px 15px;
+    }
+
+    .content-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .content-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    .content-table tbody tr:last-of-type {
+        border-bottom: 2px solid #4573c2;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+Pagos
+{% endblock %}
+
+{% block body %}
+
+<p>A continuación se le presenta el resumen de pagos correspondiente a cada sesión: </p>
+
+<div class="tabla-resultados">
+    <table class="content-table">
+
+        <thead>
+            <tr>
+
+                <th scope="row">Sesión</th>
+
+                <th>Salario</th>
+
+                <th>Monto Ahorrado</th>
+
+                <th>Pago Por Ahorro</th>
+
+                <th>Pago Final</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+
+                <th>Sesión 1</th>
+
+                <td>4000</td>
+
+                <td>{{montoahorrosesion1}}</td>
+
+                <td>{{pagoAhorroSession1}}</td>
+
+                <td>{{montoSesion1}}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Sesión 2</th>
+
+                <td>4000</td>
+
+                <td>{{montoahorrosesion2}}</td>
+
+                <td>{{pagoAhorroSession2}}</td>
+
+                <td>{{montoSesion2}}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Sesión 3</th>
+
+                <td>4000</td>
+
+                <td> - </td>
+
+                <td> - </td>
+
+                <td>{{montoSesion3}}</td>
+
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</p>El dinero que le ha sido transferido por concepto de sesiones anteriores es {{ player.disbursement }}</p>
+</p>El resultado de la actividad de la moneda fue {{moneda}}. Por lo tanto, el monto por la actividad es
+{{pagoMoneda}},00 $</p>
+</p>El dinero que le será transferido al finalizar el día es {{ player.payoff }}. Correspondientes a:</p>
+
+<ul>
+    <li>Ahorro Sesión 1: {{ahorroSesión1}},00 $</li>
+    <li>Ahorro Sesión 2: {{ahorroSesión2}},00 $</li>
+    <li>Sesión 3: {{montoSesion3}},00 $</li>
+    <li>Actividad Moneda: {{pagoMoneda}},00 $</li>
+</ul>
+
+
+{% next_button %}
+{% endblock %}

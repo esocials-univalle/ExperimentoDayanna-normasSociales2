@@ -1,0 +1,194 @@
+{% extends "base/Page.html" %}
+{% load otree %}
+
+{% block title %}
+Sesión 3
+{% endblock %}
+
+{% block body %}
+
+<div style="display: none">
+    {% formfields %}
+    {% next_button %}
+</div>
+
+<div id="surveyElement" style="display:inline-block;width:100%;"></div>
+
+{% endblock %}
+
+{% block local_scripts %}
+
+<script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js">
+</script>
+<script type="text/javascript">
+
+    let codigo = js_vars.codigo;
+
+    $(document).ready(function () {
+
+        Survey
+            .StylesManager
+            .applyTheme("default");
+
+
+        var json = {
+            "pages": [
+                {
+                    "name": "page1",
+                    "elements": [
+                        {
+                            type: "html",
+                            html: '<b>Nota:</b> En caso de estar desde un dispositivo móvil, se sugiere realizar la siguiente tarea con el dispositivo de forma horizontal. <br/><div class="sv_q_image"><img src="{% static "imagenes/telefono.jpg" %}"></div>'
+
+                        },
+                    ]
+                },
+                {
+                    "name": "page2",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "name": "banner",
+                            "imageLink": "{% static 'imagenes/3.1.jpg' %}",
+                            "imageWidth": "500px",
+                            "imageHeight": "300px"
+                        }, {
+                            "type": "panel",
+                            "innerIndent": 1,
+                            "name": "panel1",
+
+                            "elements": [
+                                {
+                                    title: "Es importante para nosotros digitalizar los párrafos que se presentan a continuación, por ello es necesario realizar un filtro a las siguientes transcripciones mediante un proceso de verificación.  Por favor, revise atentamente cuál de las siguientes transcripciones posee mayor nivel de coincidencia con el párrafo inicial. ",
+                                    isRequired: true,
+                                    "type": "radiogroup",
+                                    "choices": [
+                                        {
+                                            value: "Opcion 1",
+                                            score: 5,
+                                            text: "1.	prosperidad no se refiere solo a los ingresos. Eso está muy claro. Un incremento de la prosperidad no es lo mismo que el crecmiento económico. De por sí, no asegura que sea posible la prosperidad sin crecimiento. Sigue existiendo la posibilidad de que el crecimiento sea indispensable para alcanzar la prosperida que el crecimiento continuado sea una condición necesaria para una prosperidad duradera y que sin crecimiento nuestra posibilidad de florecimiento se reduzca sustancialmente. "
+                                        },
+                                        {
+                                            value: "Opcion 2",
+                                            score: 5,
+                                            text: "2.	La prosperidad no se refiere solo a los ingresos. Un incremento de la prosperidad no es lo mismo que el crecimiento económico. Pero esto, no asegura que sea posible la prosperidad sin crecimiento. Sigue existiendo la posibildad de que el crecimiento sea indispensable para alcanzar la prosperidad que el crecimiento sea una condición necesaria para una prosperidad duradera y que sin crecimiento nuestra posibilidad de florecimiento se reproduzca sustancialmente."
+                                        },
+                                        {
+                                            value: "Opcion 3",
+                                            score: 30,
+                                            text: "3.	La prosperidad no se refiere solo a los ingresos. eso está muy claro un incremento de la prosperidad no es lo mismo que el crecimiento económico.pero esto, de por sí no asegura que sea posible la prosperidad sin crecimiento. sigue existiendo la posibilidad de que el crecimiento sea indispensable para alcanzar la prosperidad; que el crecimiento económico continuado sea una condición necesaria para una prosperidad duradera y que sin crecimiento nuestra posibilidad de florecimiento se reduzca sustancialmente."
+                                        },
+                                        {
+                                            value: "Opcion 4",
+                                            score: 50,
+                                            text: "4.	La prosperidad no se refiere solo a los ingresos. Eso está muy claro. Un incremento de la prosperidad no es lo mismo que el crecimiento económico. Pero esto, de por sí, no asegura que sea posible la prosperidad sin crecimiento. Sigue existiendo la posibilidad de que el crecimiento sea indispensable para alcanzar la prosperidad; que el crecimiento económico continuado sea una condición necesaria para una prosperidad duradera y que sin crecimiento nuestra posibilidad de florecimiento se reduzca sustancialmente."
+                                        },
+                                    ],
+
+                                },
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "name": "page3",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "name": "banner",
+                            "imageLink": "{% static 'imagenes/3.2.jpg' %}",
+                            "imageWidth": "500px",
+                            "imageHeight": "300px"
+                        }, {
+                            "type": "panel",
+                            "innerIndent": 1,
+                            "name": "panel1",
+
+                            "elements": [
+                                {
+                                    title: "Es importante para nosotros digitalizar los párrafos que se presentan a continuación, por ello es necesario realizar un filtro a las siguientes transcripciones mediante un proceso de verificación.  Por favor, revise atentamente cuál de las siguientes transcripciones posee mayor nivel de coincidencia con el párrafo inicial. ",
+                                    isRequired: true,
+                                    "type": "radiogroup",
+                                    "choices": [
+                                        {
+                                            value: "Opcion 1",
+                                            score: 5,
+                                            text: "1.	Sin duda.. debemos tomarnos seriamente las evidencias en tal sentido. Quizás el modelo de crecimiento sea despus de todo lo más adecuado para ofrecernos prsperidad. ¿O seremos culpbles, como William Baumol y sus colegas aseguran de no darnos cuenta de que van las cosas bajo el capitalismo de libre mercado?"
+                                        },
+                                        {
+                                            value: "Opcion 2",
+                                            score: 5,
+                                            text: "2.	Sin duda, debemos tomarnos seriamente las evidencias en tal sentido.Quizas el modelo de crecimiento sea, después de todo, lo mas adecuado para ofrecernos prosperidad,.¿ o seremos culpables, como william baumol y sus colegas aseguran en la cita del encabezamiento, de nodarnos cuenta de lo bien que van las cosas bajo el captialismo de liber mercado ?"
+                                        },
+                                        {
+                                            value: "Opcion 3",
+                                            score: 5,
+                                            text: "3.	debemos tomarnos seriamente las evidencias en tal sentido. Quizá el modelo de crecimiento sea, después de todo, lo más adecuado para ofrecernos prosperidad. ¿de no darnos cuenta de lo bien que van las cosas bajo el capitalismo de libre mercado?"
+                                        },
+                                        {
+                                            value: "Opcion 4",
+                                            score: 50,
+                                            text: "4.	Sin duda, debemos tomarnos seriamente las evidencias en tal sentido. Quizá el modelo de crecimiento sea, después de todo, lo más adecuado para ofrecernos prosperidad. ¿ O seremos culpables , como William baumol y sus colegas aseguran en la cita del encabezamiento, de no darnos cuenta de lo bien que van las cosas bajo el capitalismo de libre mercado ?"
+                                        },
+                                    ],
+
+                                },
+                            ]
+                        }
+                    ]
+                }
+
+
+
+
+
+
+            ]
+        }
+            ;
+        window.survey = new Survey.Model(json);
+
+        // survey
+        //     .onComplete
+        //     .add(function (result) {
+        //         document
+        //             .querySelector('#surveyResult')
+        //             .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+
+        //         // console.log(result.data);
+
+        //     });
+
+        // survey.data = {
+        //     satisfaction: 2
+        // };
+
+        // $("#surveyElement").Survey({ model: survey });
+
+        $("#surveyElement").Survey({
+            model: survey, onComplete: function (result) {
+                console.log(result.data)
+                let data = {}
+                var variable = 0
+                Object.keys(result.data).forEach(function (key) {
+                    if (typeof result.data[key] == "object") {
+                        Object.values(result.data[key]).map((v, i) => {
+                            data[key + "." + i] = v
+                        })
+                    } else {
+                        data[key] = result.data[key]
+                    }
+                    variable = key;
+                });
+                data[Number(variable) + Number(1)] = codigo;
+                $('#id_dataSession3').val(JSON.stringify(data))
+                $('.otree-btn-next').trigger('click')
+            },
+            // onValidateQuestion: surveyValidateQuestion
+        });
+
+    })
+
+</script>
+{% endblock local_scripts %}

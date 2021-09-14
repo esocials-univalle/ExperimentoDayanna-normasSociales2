@@ -1,0 +1,15 @@
+{% extends "base/Page.html" %}
+{% load otree %}
+
+{% block title %}
+Resultado de la sesión
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<p>{{mensaje}}</p>
+<br>
+<br>
+{% next_button %}
+{% endblock %}

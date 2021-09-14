@@ -1,0 +1,222 @@
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+
+<div style="width: 100%; overflow-x: auto">
+    <h1>Encuesta socioeconomica</h1>
+    <table id="survey" class="display">
+    </table>
+    <hr>
+    <h1>Expectativas</h1>
+    <table id="cuestionario" class="display">
+    </table>
+    <hr>
+    <h1>Data Session 1</h1>
+    <table id="dataSession1" class="display">
+    </table>
+    <hr>
+    <h1>Data Session 2</h1>
+    <table id="dataSession2" class="display">
+    </table>
+    <hr>
+    <h1>Data Session 3</h1>
+    <table id="dataSession3" class="display">
+    </table>
+</div>
+
+<script>
+    function loadStyle(src) {
+        return new Promise(function (resolve, reject) {
+            let link = document.createElement('link');
+            link.href = src;
+            link.rel = 'stylesheet';
+
+            link.onload = () => resolve(link);
+            link.onerror = () => reject(new Error(`Style load error for ${src}`));
+
+            document.head.append(link);
+        });
+    }
+
+    const survey = JSON.parse("{{ survey|escapejs }}");
+    const cuestionario = JSON.parse("{{ cuestionario|escapejs }}");
+    const dataSession1 = JSON.parse("{{ dataSession1|escapejs }}");
+    const dataSession2 = JSON.parse("{{ dataSession2|escapejs }}");
+    const dataSession3 = JSON.parse("{{ dataSession3|escapejs }}");
+    console.log(cuestionario)
+    cuestionario_keys = Object.keys(cuestionario.find(e => Object.keys(e)))
+    survey_keys = Object.keys(survey.find(e => Object.keys(e)))
+    dataSession1_keys = Object.keys(dataSession1.find(e => Object.keys(e)))
+    dataSession2_keys = Object.keys(dataSession2.find(e => Object.keys(e)))
+    dataSession3_keys = Object.keys(dataSession3.find(e => Object.keys(e)))
+    console.log(cuestionario_keys)
+    console.log(survey_keys)
+    $.fn.dataTable.ext.errMode = 'none';
+    survey_table = `
+        <thead>
+         <tr>
+            ${survey_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${survey.map(e => `
+            <tr>
+                ${survey_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+    $('#survey').html(survey_table);
+    cuestionario_table = `
+        <thead>
+         <tr>
+            ${cuestionario_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${cuestionario.map(e => `
+            <tr>
+                ${cuestionario_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+
+    dataSession1_table = `
+        <thead>
+         <tr>
+            ${dataSession1_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${dataSession1.map(e => `
+            <tr>
+                ${dataSession1_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+
+    dataSession2_table = `
+        <thead>
+         <tr>
+            ${dataSession2_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${dataSession2.map(e => `
+            <tr>
+                ${dataSession2_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+
+    dataSession3_table = `
+        <thead>
+         <tr>
+            ${dataSession3_keys.map(e => `<th>${e}</th>`).join('')}
+        </tr>
+        </thead>
+        <tbody>
+        ${dataSession3.map(e => `
+            <tr>
+                ${dataSession3_keys.map(k => `<td> ${e.hasOwnProperty(k) ? e[k] : ""} </td>`).join('')}
+            </tr>
+        `).join('')}
+        </tbody>
+    `
+
+    $('#survey').html(survey_table);
+    $('#cuestionario').html(cuestionario_table);
+    $('#dataSession1').html(dataSession1_table);
+    $('#dataSession2').html(dataSession2_table);
+    $('#dataSession3').html(dataSession3_table);
+    window.onload = function () {
+        loadStyle("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css").then(e =>
+            loadStyle("https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css").then(e => {
+                try {
+                    $('#cuestionario').on('error.dt', function (e, settings, techNote, message) {
+                        console.log('An error has been reported by DataTables: ', message);
+                    }).DataTable({
+                        order: [[1, 'asc']],
+                        dom: 'Bflrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                } catch (e) {
+
+                }
+
+                try {
+                    $('#survey').on('error.dt', function (e, settings, techNote, message) {
+                        console.log('An error has been reported by DataTables: ', message);
+                    }).DataTable({
+                        order: [[1, 'asc']],
+                        dom: 'Bflrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }catch (e) {
+                    
+                }
+
+                try {
+                    $('#dataSession1').on('error.dt', function (e, settings, techNote, message) {
+                        console.log('An error has been reported by DataTables: ', message);
+                    }).DataTable({
+                        order: [[1, 'asc']],
+                        dom: 'Bflrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }catch (e) {
+                    
+                }
+
+                try {
+                    $('#dataSession2').on('error.dt', function (e, settings, techNote, message) {
+                        console.log('An error has been reported by DataTables: ', message);
+                    }).DataTable({
+                        order: [[1, 'asc']],
+                        dom: 'Bflrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }catch (e) {
+                    
+                }
+
+                try {
+                    $('#dataSession3').on('error.dt', function (e, settings, techNote, message) {
+                        console.log('An error has been reported by DataTables: ', message);
+                    }).DataTable({
+                        order: [[1, 'asc']],
+                        dom: 'Bflrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                }catch (e) {
+                    
+                }
+
+            })
+        )
+    }
+</script>

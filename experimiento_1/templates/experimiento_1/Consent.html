@@ -1,0 +1,95 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+<link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet" />
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+{% trans "Consentimiento Informado" %}
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+<div class="wrapper instructions">
+    <p align="justify">
+        Señor(a),<br><br>
+
+        La siguiente actividad es parte de un proyecto con fines académicos, realizado por la Universidad del Valle en
+        <b>el marco de la convocatoria 792 del Programa Colombia Científica</b>, que tiene como objetivo explorar
+        diversas decisiones y creencias en algunos contextos. Dicha actividad será realizada por cerca de 180 personas
+        en total y
+        consta de tres sesiones de aproximadamente 15 minutos cada una, desarrollándose una sesión por semana; la
+        primera sesión inicia hoy, la segunda sesión se realizará la próxima semana y la tercera sesión se llevará a
+        cabo entre dos o tres semanas. Si usted decide acompañarnos, no tendrá que incurrir en ningún riesgo o gasto. Le
+        entregaremos instrucciones precisas en su participación y podrá tener una remuneración mínima de $4,000 y máxima
+        de $22,500, dependiendo de la suerte y de ciertas decisiones que usted tome.<br><br>
+
+        Para cada actividad a realizar se le darán instrucciones precisas. Cada participante tiene un número de
+        identificación temporal que no está relacionado con ningún nombre o número de documento de identidad, lo que
+        garantizará el anonimato de sus respuestas. Los participantes podrán decidir terminar la actividad en cualquier
+        momento, pero sólo podrán recibir su remuneración si llegan hasta el final de la misma.<br><br>
+
+        Este proyecto es financiado por el Ministerio de Ciencia y Tecnología, y para poder pagarle por su participación
+        debemos contar con un certificado bancario de una cuenta Nequi. Si usted no nos ha enviado el certificado, por
+        favor, al terminar la actividad, envíenos el número de identificación temporal que se le envió en el mensaje de
+        invitación a esta actividad y el certificado de su cuenta Nequi al correo
+        <a href="mailto:investigacion.esocials@correounivalle.edu.co">investigacion.esocials@correounivalle.edu.co</a> o
+        a nuestro Whatsapp 3167607211. Para garantizar el anonimato y la
+        confidencialidad de sus respuestas, la certificación bancaria será tratada de manera independiente a sus
+        respuestas en este ejercicio.<br><br>
+
+        Usted tiene derecho a conocer información relacionada a este estudio, una vez esté procesada y publicada.
+        Cualquier inquietud o información que desee obtener de dicho estudio será atendida por la directora del
+        proyecto, <b>Lina María Restrepo Plaza</b> en <a
+            href="mailto:investigacion.esocials@correounivalle.edu.co">investigacion.esocials@correounivalle.edu.co</a>,
+        o <b>por el Comité de
+            Ética de la Universidad del Valle</b> en <a
+            href="mailto:eticasalud@correounivalle.edu.co">eticasalud@correounivalle.edu.co</a>. No dude en contactarse
+        a los teléfonos 3212100
+        ext. 3161, 3212324, 5185677 o 5185670.<br><br>
+
+
+
+        Si está de acuerdo con la anterior información, con enviarnos la información necesaria para tramitar su pago y
+        con que se utilicen sus respuestas con fines meramente académicos, para este y otros estudios, por favor acepte
+        los términos de esta actividad para empezar.<br><br>
+
+
+        <a href="{% static 'experimento_1/Consentimiento Informado.pdf' %}" download="Consentimiento">
+            Descargar Consentimiento
+        </a>
+
+        {% formfield player.num_temporal %}
+        {% formfield player.terminos_actividad%}
+
+    <p> Muchas gracias, </p>
+    <img class="firma" src="{% static 'imagenes/firma.png' %}">
+
+    <br>
+    Lina María Restrepo Plaza <br>
+    Investigadora Principal del Proyecto
+    <br>
+    <br>
+
+    <button id="confirm_button" class="btn btn-primary">
+        Siguiente
+    </button>
+
+</div>
+
+
+{% endblock %}

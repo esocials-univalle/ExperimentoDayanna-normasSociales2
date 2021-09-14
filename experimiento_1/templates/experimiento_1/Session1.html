@@ -1,0 +1,196 @@
+{% extends "base/Page.html" %}
+{% load otree %}
+
+{% block title %}
+Sesión 1
+{% endblock %}
+
+{% block body %}
+
+<div style="display: none">
+    {% formfields %}
+    {% next_button %}
+</div>
+
+<div id="surveyElement" style="display:inline-block;width:100%;"></div>
+
+{% endblock %}
+
+{% block local_scripts %}
+
+<script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js">
+</script>
+<script type="text/javascript">
+
+    let codigo = js_vars.codigo;
+
+    $(document).ready(function () {
+
+        Survey
+            .StylesManager
+            .applyTheme("default");
+
+
+        var json = {
+            
+            "pages": [
+                {
+                    "name": "page1",
+                    "elements": [
+                        {
+                            type: "html",
+                            html: '<b>Nota:</b> En caso de estar desde un dispositivo móvil, se sugiere realizar la siguiente tarea con el dispositivo de forma horizontal. <br/><div class="sv_q_image"><img src="{% static "imagenes/telefono.jpg" %}"></div>'
+
+                        },
+                    ]
+                },
+                {
+                    "name": "page2",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "name": "banner",
+                            "imageLink": "{% static 'imagenes/1.1.jpg' %}",
+                            "imageWidth": "500px",
+                            "imageHeight": "300px"
+                        }, {
+                            "type": "panel",
+                            "innerIndent": 1,
+                            "name": "panel1",
+
+                            "elements": [
+                                {
+                                    title: "Es importante para nosotros digitalizar los párrafos que se presentan a continuación, por ello es necesario realizar un filtro a las siguientes transcripciones mediante un proceso de verificación.  Por favor, revise atentamente cuál de las siguientes transcripciones posee mayor nivel de coincidencia con el párrafo inicial. ",
+                                    isRequired: true,
+                                    "type": "radiogroup",
+                                    "choices": [
+                                        {
+                                            value: "Opcion 1",
+                                            score: 5,
+                                            text: "1.	Un proceso de crecimiento económico sostenido plantea un problema. ¿Cómo es posible que la economía y la población mundial sigan aumentando cuando la tierra en sí es limitada? ¿ay límites al crecimiento? ¿Queda “espacio” todavía en el planeta para que los paises pobres mejoren sus niveles de vida? ¿Dispone la tierra de los recuerdos adecuados – agua, suelo, aire y servicios ecosistémicos como recursos forestales y piscícolas- para sostener una economía mundial en constante crecimiento? En resumen ¿es posible consiliar el crecimiento económico con la sostenibilidad ambiental?"
+                                        },
+                                        {
+                                            value: "Opcion 2",
+                                            score: 30,
+                                            text: "2.	Un proceso de crecimiento económico sostenido a lo largo de varios siglos plantea un problema. ¿Cómo es posible que la economía y la población mundial sigan creciendo cuando la tierra en sí es limitada? ¿Queda “espacio” todavía en el planeta para que los países pobres mejoren sus niveles de vida? ¿Dispone la tierra de los recursos adecuados – agua, suelo, aire y servicios ecosistémicos como recursos forestales y piscícolas- para sostener una economía mundial en constante crecimiento? "
+                                        },
+                                        {
+                                            value: "Opcion 3",
+                                            score: 50,
+                                            text: "3.	Un proceso de crecimiento económico sostenido a lo largo de varios siglos plantea un problema. ¿Cómo es posible que la economía y la población mundial sigan creciendo cuando la tierra en sí es limitada? ¿Hay límites al crecimiento? ¿Los hemos excedido ya? ¿Queda “espacio” todavía en el planeta para que los países pobres mejoren sus niveles de vida? ¿Dispone la tierra de los recursos adecuados – agua, suelo, aire y servicios ecosistémicos como recursos forestales y piscícolas- para sostener una economía mundial en constante crecimiento? En resumen, ¿es posible reconciliar el crecimiento económico con la sostenibilidad ambiental?"
+                                        },
+                                        {
+                                            value: "Opcion 4",
+                                            score: 5,
+                                            text: "4.	Un proceso de crecimiento economico sostenido a lo largo de varios siglos plantea un problema. ¿Haylímites al crecimiento? ¿Los hemos excedido ya? ¿Queda espacio todavia en el planeta para que los países pobes mejoren sus niveles de vida? ¿Disponela tierra de los recursos adecuados  agua suelo  aire y servicios ecosistémicos como recursos forestales y piscolas? En resumen ¿es posible reconciliar el crecimiento economico con la sostenibilidad ambiental?"
+                                        },
+                                    ],
+
+
+                                },
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "name": "page3",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "name": "banner",
+                            "imageLink": "{% static 'imagenes/1.2.jpg' %}",
+                            "imageWidth": "500px",
+                            "imageHeight": "300px"
+                        }, {
+                            "type": "panel",
+                            "innerIndent": 1,
+                            "name": "panel1",
+
+                            "elements": [
+                                {
+                                    title: "Es importante para nosotros digitalizar los párrafos que se presentan a continuación, por ello es necesario realizar un filtro a las siguientes transcripciones mediante un proceso de verificación.  Por favor, revise atentamente cuál de las siguientes transcripciones posee mayor nivel de coincidencia con el párrafo inicial. ",
+                                    isRequired: true,
+                                    "type": "radiogroup",
+                                    "choices": [
+                                        {
+                                            value: "Opcion 1",
+                                            score: 5,
+                                            text: "1.	Spiramos a un mundo prospero, socialmente inclusivo y ambientalmente sostenible. Pero ¿es posible alcanzar todos esos objetivos al mismo tiempo? Grandes pensadores se han planteado esta pregunta desde finales del siglo xviii. ¿Se revelarán ilusorias todas las mejoras alcanzadas en los niveles de vida cuando surgan carencias de materias primas? ¿Está la humanidad coordenada en ultimo termino a la pobreza por causa de la escasez? ¿Son las mejoras alcanzadas en el nivel de vida un exceso temporal, cuya factura deberá pagarse en el futuro en forma de una crisis medioambiental?"
+                                        },
+                                        {
+                                            value: "Opcion 2",
+                                            score: 5,
+                                            text: "2.	Todas estas cuestiones nos llevan al corazn del desarrollo sostenible. Aspiramos a un mundo prospero socialmente inlusivo y ambientalmente sostenible ¿es posible alcanzar todos esos objetivos al mismo tiempo? Grandes pesadores se han planteado esta pregunta dsde finales del siglo xvlll. ¿Se revelaran ls mejoras alcanzadas en los niveles de vda cuando surjan carencias de materias primas? ¿Está la humanidad condenada en ultimo termino a la pobreza por causa de la escasez? ¿Son las mejoras alcanzadas en el nivel de vida un exceso temporal, cuya factura deberá pagarse en el futuro en forma de una crisis medioambiental? "
+                                        },
+                                        {
+                                            value: "Opcion 3",
+                                            score: 50,
+                                            text: "3.	Todas estas cuestiones nos llevan al corazón del desarrollo sostenible. Aspiramos a un mundo prospero, socialmente inclusivo y ambientalmente sostenible. Pero ¿es posible alcanzar todos esos objetivos al mismo tiempo? Grandes pensadores se han planteado esta pregunta desde finales del siglo XVIII. ¿Está la humanidad condenada en ultimo termino a la pobreza por causa de la escasez? ¿Son las mejoras alcanzadas en el nivel de vida un exceso temporal, cuya factura deberá pagarse en el futuro en forma de una crisis medioambiental?"
+                                        },
+                                        {
+                                            value: "Opcion 4",
+                                            score: 30,
+                                            text: "4.	Todas estas cuestiones del desarrollo sostenible. Aspiramos a un mundo prospero, socialmente inclusivo y ambientalmente sostenible. Pero ¿es posible alcanzar todos esos objetivos al mismo tiempo? ¿Se revelarán ilusorias todas las mejoras alcanzadas en los niveles de vida cuando surjan carencias de materias primas? ¿Son las mejoras alcanzadas en el nivel de vida un exceso temporal, cuya factura deberá pagarse en el futuro en forma de una crisis medioambiental?"
+                                        },
+                                    ],
+
+                                },
+                            ]
+                        }
+                    ]
+                }
+
+
+
+
+
+
+            ]
+        }
+            ;
+        window.survey = new Survey.Model(json);
+
+        // survey
+        //     .onComplete
+        //     .add(function (result) {
+        //         document
+        //             .querySelector('#surveyResult')
+        //             .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+
+        //         // console.log(result.data);
+
+        //     });
+
+        // survey.data = {
+        //     satisfaction: 2
+        // };
+
+        // $("#surveyElement").Survey({ model: survey });
+
+        $("#surveyElement").Survey({
+            model: survey, onComplete: function (result) {
+                console.log(result.data)
+                let data = {}
+                var variable = 0
+                Object.keys(result.data).forEach(function (key) {
+                    if (typeof result.data[key] == "object") {
+                        Object.values(result.data[key]).map((v, i) => {
+                            data[key + "." + i] = v
+                        })
+                    } else {
+                        data[key] = result.data[key]
+                    }
+                    variable = key;
+                });
+                data[Number(variable) + Number(1)] = codigo;
+                $('#id_dataSession1').val(JSON.stringify(data))
+                $('.otree-btn-next').trigger('click')
+            },
+            // onValidateQuestion: surveyValidateQuestion
+        });
+
+    })
+
+</script>
+{% endblock local_scripts %}

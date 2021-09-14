@@ -1,0 +1,159 @@
+{% extends "base/Page.html" %}
+{% load otree%}
+
+{% block title %}
+    Opciones de pago sesión {{ player.intermedio_actual }}
+{% endblock %}
+
+{% block body %}
+
+               
+    <div class="row">
+        <div class="col-12">
+
+      
+            {% formfield player.money_decision %}
+            <div style="display: none" id="percentage_saved_div">
+                {% formfield player.percentage_saved %}
+            </div>
+        </div>
+    </div>
+ 
+    <div style="display: None" id="confirm_button">
+        <button id="confirm_button" type="button" class="btn btn-primary">
+            Confirmar
+        </button>
+    </div>
+                <div class="modal-body">
+                    <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        {% next_button %}
+        
+    </div>
+{% endblock %}
+
+{% block local_scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
+
+    </script>
+    <script type="text/javascript">
+
+let sesion = js_vars.sesion;
+
+
+document.querySelectorAll('input[name="money_decision"]').forEach((x) => x.checked = false);
+
+    var confirm_button = document.getElementById("confirm_button");
+        
+   
+
+        $(document).on('change', 'input[name="money_decision"]', function () {
+            $('#id_percentage_saved').val(0);
+            if ($('input[name="money_decision"]:checked').val() == 1) {
+                $('#confirm_button').hide()
+                $('#percentage_saved_div').show();
+            } else {
+                $('#confirm_button').show()
+                $('#percentage_saved_div').hide();
+
+                confirm_button.addEventListener("click", function(){
+
+
+                    if (sesion == 1) {
+                        console.log("Estoy en la sesion 1")
+
+                        if ($('input[name="money_decision"]:checked').val() == 0) {
+                            console.log("decision 1")
+                            liveSend({'type': 'sesion1', 'decision': 0});
+                        } else {
+                            console.log("decision 3")
+                            liveSend({'type': 'sesion1', 'decision': 2});
+                        }
+                        
+                    } else {
+                        console.log("Estoy en la sesion 2")
+                        if ($('input[name="money_decision"]:checked').val() == 0) {
+                            console.log("decision 1")
+                            liveSend({'type': 'sesion2', 'decision': 0});
+                        } else {
+                            console.log("decision 3")
+                            liveSend({'type': 'sesion2', 'decision': 2});
+                        }
+                    }
+
+
+                     $('.otree-btn-next').trigger('click');
+                }, false);
+            }
+        })
+        $(document).on('change', '#id_percentage_saved', function () {
+            $('#confirm_button').show();
+            confirm_button.addEventListener("click", function(){
+                
+                var porcentaje = Number($('#id_percentage_saved').val());
+
+                if (sesion == 1 && porcentaje<=100 && porcentaje>=0) {
+                        console.log("Estoy en la sesion 1")
+                        console.log(porcentaje)
+                        liveSend({'type': 'sesion1', 'decision': 1, 'porcentaje': porcentaje});
+                    } else if (sesion == 2 && porcentaje<=100 && porcentaje>=0){
+                        console.log("Estoy en la sesion 2")
+                        liveSend({'type': 'sesion2', 'decision': 1, 'porcentaje': porcentaje});
+                    }
+
+
+                     $('.otree-btn-next').trigger('click');
+                }, false);
+        })
+        chartColors = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+        var color = Chart.helpers.color;
+        var ctx = document.getElementById('myChart').getContext('2d');
+        data = {
+            datasets: [{
+                data: [
+                    {% for value in group.players_info %}
+                        {{ value }},
+                    {% endfor %}
+                ],
+                backgroundColor: [
+                    color(chartColors.red).alpha(0.5).rgbString(),
+                    color(chartColors.green).alpha(0.5).rgbString(),
+                    color(chartColors.blue).alpha(0.5).rgbString()
+                ]
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Opcion 1',
+                'Opcion 2',
+                'Opcion 3'
+            ]
+        };
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+        });
+
+
+    /*    var el = document.getElementById("t");
+  el.addEventListener("click", function(){modifyText("four")}, false);*/
+
+        
+    </script>
+    <script type="text/javascript" src="https://surveyjs.azureedge.net/1.1.13/survey.jquery.min.js">
+
+    </script>
+   
+{% endblock local_scripts %}

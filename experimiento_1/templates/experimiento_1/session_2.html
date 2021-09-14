@@ -1,0 +1,237 @@
+{% extends "base/Page.html" %}
+{% load otree %}
+
+{% block title %}
+¿Cuánto dinero deseas invertir?
+{% endblock %}
+
+
+
+{% block local_styles %}
+    <style>
+        body {
+            padding-top: 50px;
+            background: #F7F7F7;
+            -webkit-perspective: 800px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #coin {
+            position: relative;
+            margin: 0 auto;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        #coin div {
+            width: 100%;
+            height: 100%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            -webkit-box-shadow: inset 0 0 45px rgba(29, 139, 238, 0.4), 0 12px 20px -10px rgba(29, 139, 238, 0.4);
+            -moz-box-shadow: inset 0 0 45px rgba(29, 139, 238, 0.4), 0 12px 20px -10px rgba(29, 139, 238, 0.4);
+            box-shadow: inset 0 0 45px rgba(29, 139, 238, 0.4), 0 12px 20px -10px rgba(29, 139, 238, 0.4);
+        }
+
+        .side-a {
+            background-color: #bb0000;
+        }
+
+        .side-b {
+            background-color: #3e3e3e;
+        }
+
+        #coin {
+            transition: -webkit-transform 1s ease-in;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        #coin div {
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .side-a {
+            z-index: 100;
+        }
+
+        .side-b {
+            -webkit-transform: rotateY(-180deg);
+
+        }
+
+        #coin.heads {
+            -webkit-animation: flipHeads 3s ease-out forwards;
+            -moz-animation: flipHeads 3s ease-out forwards;
+            -o-animation: flipHeads 3s ease-out forwards;
+            animation: flipHeads 3s ease-out forwards;
+        }
+
+        #coin.tails {
+            -webkit-animation: flipTails 3s ease-out forwards;
+            -moz-animation: flipTails 3s ease-out forwards;
+            -o-animation: flipTails 3s ease-out forwards;
+            animation: flipTails 3s ease-out forwards;
+        }
+
+        @-webkit-keyframes flipHeads {
+            from {
+                -webkit-transform: rotateY(0);
+                -moz-transform: rotateY(0);
+                transform: rotateY(0);
+            }
+            to {
+                -webkit-transform: rotateY(1800deg);
+                -moz-transform: rotateY(1800deg);
+                transform: rotateY(1800deg);
+            }
+        }
+
+        @-webkit-keyframes flipTails {
+            from {
+                -webkit-transform: rotateY(0);
+                -moz-transform: rotateY(0);
+                transform: rotateY(0);
+            }
+            to {
+                -webkit-transform: rotateY(1980deg);
+                -moz-transform: rotateY(1980deg);
+                transform: rotateY(1980deg);
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+   
+
+    {% csrf_token %}
+    <div style="display: none">
+        {% formfield form.coin_select %}
+        {% next_button %}
+
+    </div>
+    {% formfield form.Monto %}
+    <div id="coin">
+        <div class="side-a"></div>
+        <div class="side-b"></div>
+    </div>
+
+    <button type="button" class="btn btn-success" id="lanzar_moneda" data-target="#modal-encuesta">
+        Lanzar moneda
+    </button>
+
+    <div class="modal fade" id="modal-encuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="max-height: 850px; overflow-y: auto" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="texto-modal"> Texto modal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block local_scripts %}
+
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery@1.8.31/survey.jquery.min.js"></script>
+    <script type="text/javascript">
+
+    var boton_lanzar = document.getElementById("lanzar_moneda"); 
+
+    // function lanzar(){
+    //     // var monto = Number($('#id_Monto').val());
+    //     var flipResult = Math.random();
+    //     console.log(flipResult)
+    //                 $('#coin').removeClass();
+    //                 setTimeout(function () {
+    //                     if (flipResult <= 0.5) {
+    //                         $('#coin').addClass('heads');
+    //                         $('#id_coin_select').val(0)
+    //                         // console.log("rojo");
+    //                         // liveSend({'resultado': 'rojo', 'monto': monto});
+    //                     } else {
+    //                         $('#coin').addClass('tails');
+    //                         $('#id_coin_select').val(1)
+    //                         // console.log("azul");
+    //                         // liveSend({'resultado': 'azul', 'monto': monto});
+    //                     }
+
+    //                     setTimeout(() => {
+    //                         $('form').submit()
+    //                     }, 4000);
+
+    //                 }, 100);
+    // }
+
+    function lanzar(){
+        var flipResult = Math.random();
+                    $('#coin').removeClass();
+                    setTimeout(function () {
+                        if (flipResult <= 0.5) {
+                            $('#coin').addClass('heads');
+                            $('#id_coin_select').val(0)
+                        } else {
+                            $('#coin').addClass('tails');
+                            $('#id_coin_select').val(1)
+                        }
+
+                        setTimeout(() => {
+                            $('form').submit()
+                        }, 4000);
+
+                    }, 100);
+    }
+
+
+    window.setInterval(
+    function(){
+        let input = Number(document.getElementById('id_Monto').value);
+        // console.log(input)
+        if (input >= 0 && input <=5000) {
+            boton_lanzar.removeAttribute('data-toggle');
+            boton_lanzar.addEventListener("click",lanzar);
+            boton_lanzar.className = "btn btn-success";
+        } else {
+            boton_lanzar.className = "btn btn-secondary";
+            boton_lanzar.removeEventListener("click",lanzar);
+            boton_lanzar.setAttribute('data-toggle', 'modal');
+            document.getElementById("texto-modal").innerHTML = "El monto debe ser menor o igual a 5000.";
+   
+        }
+
+  }
+,250);
+
+
+$('#id_Monto').on('keypress', function(event) {
+//   field1 = $('#field1').val();
+//   var newField1 = parseFloat(field1.replace(/,/g, ''));
+//   console.log(newField1);
+
+if(event.charCode >= 48 && event.charCode <= 57){
+      return true;
+     }
+     return false;
+});
+
+    </script>
+{% endblock local_scripts %}
+
+
+   
+    

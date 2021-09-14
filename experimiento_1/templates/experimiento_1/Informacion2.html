@@ -1,0 +1,101 @@
+{% extends "base/Page.html" %}
+{% load otree%}
+
+{% block title %}
+Información sobre las opciones de pago
+{% endblock %}
+
+{% block styles %}
+<style>
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    .container-survey {
+        width: 75%;
+        margin: auto;
+        color: black;
+        border: 1px solid black;
+        padding: 20px;
+    }
+
+    #description {
+        font-size: 20px;
+    }
+
+    #description p {
+        text-align: center;
+    }
+
+    #survey-form {
+        text-align: justify;
+    }
+
+    .row-tab {
+        background-color: #f3f3f3;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .error {
+        width: 100%;
+        padding: 1% 2%;
+        border: 1px solid #ED6160;
+        background-color: #f8dcdb;
+        color: #ED6160;
+        display: none;
+    }
+
+    .label-tab {
+        font-weight: bold;
+    }
+
+    input[type="radio"] {
+        margin: 10px;
+        vertical-align: middle;
+    }
+
+    input[type="number"] {
+        width: 100%;
+    }
+
+  
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<p>A continuación, le presentamos las siguientes opciones de pago para el trabajo de esta sesión.
+</p>
+
+<ol>
+    <li>Recibir los $4.000 al finalizar el día.</li>
+    <li>Guardar una parte de su pago y por cada $100 que decida guardar nosotros le daremos ${{price_session}} más.
+        Podrá recibir en esta sesión una parte de su pago y el monto guardado será transferido en la última sesión, es
+        decir, entre 8 y 16 días a partir de hoy.</li>
+    <li>Guardar la totalidad de su pago y recibirlo al finalizar la tercera sesión; es decir, entre 8 y 16 días a partir
+        de hoy. Recuerde que por cada $100 nosotros le daremos ${{price_session}} más.</li>
+</ol>
+
+</p>
+<br>
+
+
+<button id="confirm_button" class="btn btn-primary">
+    Siguiente
+</button>
+
+
+{% endblock %}
+
+{% block local_scripts %}
+
+<script>
+    
+</script>
+{% endblock local_scripts %}
